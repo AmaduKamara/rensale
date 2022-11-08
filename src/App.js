@@ -10,10 +10,9 @@ import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
 
 const App = () => {
-  const [active, setActive] = useState("home");
   return (
     <>
-      <Header active={active} setActive={setActive} />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
