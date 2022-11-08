@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { FcGoogle } from "react-icons/fc";
@@ -6,6 +6,25 @@ import { FcGoogle } from "react-icons/fc";
 const forgotPassword = "./images/auth/forgot-password.png";
 
 const ForgotPassword = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+  });
+
+  const { email } = FormData;
+
+  // Form Input Change
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  // Form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData.email);
+  };
   return (
     <main className="w-screen h-screen">
       <div className="flex items-center">
@@ -22,13 +41,14 @@ const ForgotPassword = () => {
             <h1 className="text-lg md:text-3xl text-gray-800 text-center font-semibold">
               Forgot Password
             </h1>
-            <form className="w-[500px] mt-10">
+            <form className="w-[500px] mt-10" onSubmit={handleSubmit}>
               <input
                 type="email"
-                name=""
-                value=""
+                name="email"
+                value={email}
                 placeholder="Email"
-                className="mb-4 p-3 rounded-md border focus:outline-cyan-500 block w-full"
+                className="mb-4 p-3 rounded-md border border-gray-300 transition ease-in-out text-gray-600 focus:outline-cyan-500 block w-full"
+                onChange={onChange}
               />
               <div className="mt-4 flex justify-between items-center">
                 <p>
