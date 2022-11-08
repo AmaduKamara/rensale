@@ -7,4 +7,9 @@
 body {
   font-family: "Poppins", sans-serif;
   font-size: 14px;
+  background-color: #f2f5ff;
+  width: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
 }
