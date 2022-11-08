@@ -61,14 +61,14 @@ const ForgotPassword = () => {
                   </Link>
                 </p>
                 <Link to="/signin" className="text-blue-500">
-                  Signin
+                  Signin instead
                 </Link>
               </div>
               <button
                 type="submit"
                 className="py-3 md:py-4 w-full bg-cyan-500 hover:bg-cyan-700 text-white uppercase mt-5 rounded-lg transition ease-in-out duration-300"
               >
-                Submit
+                Submit Reset Email
               </button>
               <div className="my-3 flex items-center  before:border-t before:flex-1  before:border-gray-300 after:border-t after:flex-1  after:border-gray-300">
                 <p className="text-center font-semibold mx-4">OR</p>
