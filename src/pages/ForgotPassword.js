@@ -47,13 +47,16 @@ const ForgotPassword = () => {
                 name="email"
                 value={email}
                 placeholder="Email"
-                className="mb-4 p-3 rounded-md border border-gray-300 transition ease-in-out text-gray-600 focus:outline-cyan-500 block w-full"
+                className="mb-4 p-3 rounded-md border border-gray-300 transition ease-in-out duration-300 text-gray-600 focus:outline-cyan-500 block w-full"
                 onChange={onChange}
               />
               <div className="mt-4 flex justify-between items-center">
                 <p>
                   Don't have an account?{" "}
-                  <Link to="/signup" className="text-cyan-500">
+                  <Link
+                    to="/signup"
+                    className="text-cyan-500 hover:text-cyan-700 transition ease-in-out duration-300"
+                  >
                     Register
                   </Link>
                 </p>
@@ -63,14 +66,13 @@ const ForgotPassword = () => {
               </div>
               <button
                 type="submit"
-                className="py-3 md:py-4 w-full bg-cyan-500 hover:bg-cyan-700 text-white uppercase mt-5 rounded-lg"
+                className="py-3 md:py-4 w-full bg-cyan-500 hover:bg-cyan-700 text-white uppercase mt-5 rounded-lg transition ease-in-out duration-300"
               >
                 Submit
               </button>
-              <p className="text-center border-cyan-500 mt-6 w-full flex justify-between items-center">
-                <span className="bg-gray-100 mx-5 h-1 w-full"></span> OR{" "}
-                <span className="bg-gray-100 mx-5 h-1 w-full"></span>
-              </p>
+              <div className="my-3 flex items-center  before:border-t before:flex-1  before:border-gray-300 after:border-t after:flex-1  after:border-gray-300">
+                <p className="text-center font-semibold mx-4">OR</p>
+              </div>
               <div className="flex items-center justify-center mt-2">
                 <div className="h-12 w-12 rounded-full shadow-xl flex items-center justify-center border border-gray-100">
                   <Link to="/">
