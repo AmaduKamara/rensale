@@ -1,11 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { FcGoogle } from "react-icons/fc";
+import { AiFillEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const signup = "./images/auth/signup.png";
 
 const SignUp = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { username, email, password } = FormData;
+
+  // Form Input Change
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  // Form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData.username, formData.email, formData.password);
+  };
+
   return (
     <main className="w-screen h-screen">
       <div className="flex items-center">
@@ -22,28 +47,50 @@ const SignUp = () => {
             <h1 className="text-lg md:text-3xl text-gray-800 text-center font-semibold">
               Sign Up
             </h1>
-            <form className="w-[500px] mt-10">
+            <form className="w-[500px] mt-10" onSubmit={handleSubmit}>
               <input
-                type="username"
-                name=""
-                value=""
+                type="text"
+                name="username"
+                value={username}
                 placeholder="Username"
-                className="mb-4 p-3 rounded-md border focus:outline-cyan-500 block w-full"
+                className="mb-4 p-3 rounded-md border border-gray-300 text-gray-600 transition ease-in-out focus:outline-cyan-500 block w-full"
+                onChange={onChange}
               />
               <input
                 type="email"
-                name=""
-                value=""
+                name="email"
+                value={email}
                 placeholder="Email"
-                className="mb-4 p-3 rounded-md border focus:outline-cyan-500 block w-full"
+                className="mb-4 p-3 rounded-md border border-gray-300 text-gray-600 transition ease-in-out focus:outline-cyan-500 block w-full"
+                onChange={onChange}
               />
-              <input
-                type="password"
-                name=""
-                value=""
-                placeholder="Password"
-                className="mb-4 p-3 rounded-md border focus:outline-cyan-500 block w-full"
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={password}
+                  placeholder="Password"
+                  className="mb-4 p-3 rounded-md border border-gray-300 text-gray-600 transition ease-in-out focus:outline-cyan-500 block w-full"
+                  onChange={onChange}
+                />
+                {!showPassword ? (
+                  <>
+                    <AiFillEye
+                      className="absolute top-0 right-0 m-4 text-gray-500 hover:text-gray-600 cursor-pointer"
+                      size={20}
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <AiOutlineEyeInvisible
+                      className="absolute top-0 right-0 m-4 text-gray-500 hover:text-gray-600 cursor-pointer"
+                      size={20}
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  </>
+                )}
+              </div>
               <div className="mt-4 flex justify-between items-center">
                 <p>
                   Already have account?{" "}
@@ -51,7 +98,9 @@ const SignUp = () => {
                     Signin
                   </Link>
                 </p>
-                <Link to="/forgot-password" className="text-blue-500">Forgot password</Link>
+                <Link to="/forgot-password" className="text-blue-500">
+                  Forgot password
+                </Link>
               </div>
               <button
                 type="submit"
