@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -6,11 +7,13 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Offers from "./pages/Offers";
 import NotFound from "./pages/NotFound";
+import Header from "./components/Header";
 
 const App = () => {
+  const [active, setActive] = useState("home");
   return (
     <>
-      <h1>Rentor</h1>
+      <Header active={active} setActive={setActive} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
