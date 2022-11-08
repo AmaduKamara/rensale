@@ -6,25 +6,19 @@ import OAuth from "./../components/OAuth";
 const forgotPassword = "./images/auth/forgot-password.png";
 
 const ForgotPassword = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-  });
-
-  const { email } = FormData;
+  const [email, setEmail] = useState("");
 
   // Form Input Change
   const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
+    setEmail(e.target.value);
   };
 
   // Form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData.email);
+    console.log(email);
   };
+
   return (
     <main className="w-screen h-screen">
       <div className="flex items-center">
