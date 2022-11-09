@@ -56,7 +56,6 @@ const SignUp = () => {
       await setDoc(doc(db, "users", user.uid), formDataCopy);
       navigate("/"); // navigate the user to homepage after signup
     } catch (error) {
-      console.log(error);
       toast.error("Registration error");
     }
   };
