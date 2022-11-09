@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase";
+
+import { toast } from "react-toastify";
 
 import { AiFillEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import OAuth from './../components/OAuth';
+import OAuth from "./../components/OAuth";
 
 const signin = "./images/auth/signin.png";
 
@@ -15,6 +19,7 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { email, password } = FormData;
+  const navigate = useNavigate();
 
   // Form Input Change
   const onChange = (e) => {
@@ -25,9 +30,23 @@ const SignIn = () => {
   };
 
   // Form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.email, formData.password);
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+      const user = userCredential.user;
+
+      if (user) {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("Invalid credentials");
+    }
   };
 
   return (
