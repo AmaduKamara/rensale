@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { serverTimestamp, setDoc, doc } from "firebase/firestore";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { toast } from "react-toastify";
+import { auth, db } from "../firebase";
 
 import { AiFillEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import OAuth from "../components/OAuth";
@@ -17,6 +20,7 @@ const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const { username, email, password } = FormData;
+  const navigate = useNavigate();
 
   // Form Input Change
   const onChange = (e) => {
@@ -27,9 +31,34 @@ const SignUp = () => {
   };
 
   // Form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData.username, formData.email, formData.password);
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+
+      // Update user profile after signup
+      await updateProfile(auth.currentUser, {
+        displayName: formData.username,
+      });
+
+      // Get the user from the signedup user credential
+      const user = userCredential.user;
+      const formDataCopy = { ...formData }; // copy formData
+      delete formDataCopy.password; // remove password from copied formData
+      formDataCopy.timestamp = serverTimestamp();
+
+      // Save user to users collection
+      await setDoc(doc(db, "users", user.uid), formDataCopy);
+      navigate("/"); // navigate the user to homepage after signup
+    } catch (error) {
+      console.log(error);
+      toast.error("Registration error");
+    }
   };
 
   return (
